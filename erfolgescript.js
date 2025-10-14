@@ -34,164 +34,182 @@ document.addEventListener("DOMContentLoaded", () => {
   let showOpenOnly = false;
 
   // ------------------------------------------------------------
-  // 2. Erfolgsdaten (Beispiel)
+  // 2. Erfolgsdaten (Beispiel - nur 3 Zeilen zum Testen)
+  // Ersetze dies durch die vollständige erfolge-Liste
   // ------------------------------------------------------------
   const erfolge = [
       // BASE GAME
-      { id: 1, name: "Inventur", beschreibung: "Öffne dein Inventar.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 2, name: "Holzfällerei", beschreibung: "Schlage auf einen Baum ein, bis ein Block Holz herausfällt.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 3, name: "Die lange Bank", beschreibung: "Stell aus vier Blöcken Holz eine Werkbank her.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 4, name: "Ab in die Mine", beschreibung: "Stell aus Holz und Stöcken eine Spitzhacke her.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 5, name: "Heißes Thema", beschreibung: "Stell aus 8 Pflasterstein-Blöcken einen Ofen her.", punkte: "15G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 6, name: "Werkzeugherstellung", beschreibung: "Schmilz einen Eisenbarren.", punkte: "15G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 7, name: "Zeit für Ackerbau!", beschreibung: "Stell aus Holz und Stöcken eine Hacke her.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 8, name: "Brot backen", beschreibung: "Stell Brot aus Weizen her.", punkte: "15G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 9, name: "Die Lüge", beschreibung: "Backe aus Weizen, Zucker, Milch und Eiern einen Kuchen!", punkte: "30G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 10, name: "Es geht immer noch besser", beschreibung: "Stell eine bessere Spitzhacke her.", punkte: "15G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 11, name: "Köstlicher Fisch", beschreibung: "Fange einen Fisch und koche ihn!", punkte: "15G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 12, name: "Per Schiene", beschreibung: "Reise mit einer Lore mindestens 500 Meter in eine Richtung.", punkte: "40G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 13, name: "Zeit zum Zuschlagen!", beschreibung: "Stell aus Holz und Stöcken ein Schwert her.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 14, name: "Monsterjäger", beschreibung: "Greif ein Monster an und töte es.", punkte: "15G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 15, name: "Das Fell über die Ohren ziehen", beschreibung: "Gewinne Leder.", punkte: "15G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 16, name: "Wenn Schweine fliegen", beschreibung: "Reite ein Schwein mit einem Sattel, und füg ihm dann während des Reitens Schaden durch Fallen zu.", punkte: "40G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 17, name: "Alphawolf", beschreibung: "Freunde dich mit fünf Wölfen an.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 18, name: "Bestens ausgerüstet", beschreibung: "Stell ein Exemplar von jedem Werkzeug her (1 Spitzhacke, 1 Spaten, 1 Axt und 1 Hacke).", punkte: "15G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 19, name: "Feuer frei", beschreibung: "Stell einen Dispenser her.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 20, name: "Auf in den Nether", beschreibung: "Stell ein Netherportal her.", punkte: "30G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 21, name: "Scharfschützenduell", beschreibung: "Töte ein Skelett aus mehr als 50 Metern Entfernung mit einem Pfeil.", punkte: "30G", typ: "RARE", kategorie: "Base Game" },
-      { id: 22, name: "DIAMANTEN!", beschreibung: "Sammle mit deinen Eisenwerkzeugen Diamanten.", punkte: "20G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 23, name: "Zurück zum Absender", beschreibung: "Vernichte einen Ghast mit einem Feuerball.", punkte: "30G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 24, name: "Ins Feuer!", beschreibung: "Erleichtere eine Lohe um ihre Rute.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 25, name: "Selbstgebrautes", beschreibung: "Braue einen Trank.", punkte: "15G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 26, name: "Das Ende?", beschreibung: "Betritt ein Endportal.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 27, name: "Das Ende!", beschreibung: "Besiege den Enderdrachen.", punkte: "40G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 28, name: "Bezaubernd", beschreibung: "Baue einen Zaubertisch.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 29, name: "Übertriebene Gewalt", beschreibung: "Verursache mit einem einzigen Schlag neun Herzen Schaden.", punkte: "30G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 30, name: "Bibliothekar", beschreibung: "Baue ein paar Bücherregale, um deinen Zaubertisch zu verbessern.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 31, name: "Abenteuerzeit", beschreibung: "Entdecke 17 von 40 Biomen.", punkte: "40G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 32, name: "Neubesiedelung", beschreibung: "Züchte zwei Kühe mit Weizen.", punkte: "15G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 33, name: "Diamanten für dich!", beschreibung: "Wirf Diamanten auf einen anderen Spieler.", punkte: "15G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 34, name: "Schweinefleisch", beschreibung: "Koche und iss Schweinefleisch.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 35, name: "Die Zeit vertreiben", beschreibung: "Spiele 100 Tage.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 36, name: "Bogenschütze", beschreibung: "Erledige einen Creeper mit Pfeilen.", punkte: "10G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 37, name: "Der Feilscher", beschreibung: "Erwirb 30 Smaragde durch den Handel mit Dorfbewohnern oder durch Abbau.", punkte: "30G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 38, name: "Blumentöpfler", beschreibung: "Stelle einen Blumentopf her und platziere ihn.", punkte: "15G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 39, name: "Ein Schild!", beschreibung: "Stelle ein Schild her und platziere es.", punkte: "15G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 40, name: "Eiserner Magen", beschreibung: "Entgehe dem Hungertod durch verrottetes Fleisch.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 41, name: "Schönen Schertag!", beschreibung: "Benutze Scheren, um Wolle von Schafen zu erhalten.", punkte: "15G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 42, name: "Regenbogensammlung", beschreibung: "Sammle alle 16 Wollfarben.", punkte: "30G", typ: "RARE", kategorie: "Base Game" },
-      { id: 43, name: "Cool bleiben", beschreibung: "Schwimme in Lava, während du den Feuerwiderstand-Effekt hast.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 44, name: "Haufenweise Pflastersteine", beschreibung: "Baue 1.728 Blöcke Pflasterstein ab und platziere sie in einer Truhe.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 45, name: "Erneuerbare Energie", beschreibung: "Schmilz Baumstämme mit Holzkohle, um mehr Holzkohle zu erhalten.", punkte: "10G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 46, name: "Musik in meinen Ohren", beschreibung: "Spiele eine Schallplatte in einer Jukebox ab.", punkte: "10G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 47, name: "Bodyguard", beschreibung: "Erschaffe einen Eisengolem.", punkte: "20G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 48, name: "Iron Man", beschreibung: "Trage ein komplettes Set Eisenrüstung.", punkte: "15G", typ: "COMMON", kategorie: "Base Game" },
-      { id: 49, name: "Zombie-Doktor", beschreibung: "Heile einen Zombie-Dorfbewohner.", punkte: "40G", typ: "UNCOMMON", kategorie: "Base Game" },
-      { id: 50, name: "Löwenjäger", beschreibung: "Gewinne das Vertrauen eines Ozelots.", punkte: "15G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 1, name: "Alle Trophäen erhalten", beschreibung: "Alle Trophäen wurden erhalten.", punkte: "10G", typ: "EPIC", kategorie: "Base Game" },
+      { id: 2, name: "Inventur machen", beschreibung: "Öffne dein Inventar.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 3, name: "Dreimal auf Holz geklopft", beschreibung: "Schlage gegen einen Baum, bis ein Holzblock herausspringt.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 4, name: "Fortgeschrittenes Handwerk", beschreibung: "Fertige aus vier Holzbrettern eine Werkbank an.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 5, name: "Glückauf!", beschreibung: "Stelle aus Holz und Stöcken eine Spitzhacke her.", punkte: "10G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 6, name: "Heiße Angelegenheit", beschreibung: "Konstruiere aus acht Bruchstein-Blöcken einen Schmelzofen.", punkte: "12G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 7, name: "Schmiedekunst", beschreibung: "Schmelze einen Eisenbarren.", punkte: "14G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 8, name: "Fang an zu ackern!", beschreibung: "Stelle aus Holz und Stöcken eine Hacke her.", punkte: "19G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 9, name: "Bäcker", beschreibung: "Backe ein Brot aus Weizen.", punkte: "18G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 10, name: "Die Lüge", beschreibung: "Backe einen Kuchen aus Weizen, Zucker, Milch und Eiern!", punkte: "58G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 11, name: "Technischer Fortschritt", beschreibung: "Konstruiere eine bessere Spitzhacke.", punkte: "11G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 12, name: "Köstlicher Fisch", beschreibung: "Fange und brate einen Fisch!", punkte: "30G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 13, name: "Bahn frei!", beschreibung: "Reise mit einer Lore mindestens 500 Meter in eine Richtung.", punkte: "69G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 14, name: "Zu den Waffen!", beschreibung: "Stell aus Holz und Stöcken ein Schwert her.", punkte: "11G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 15, name: "Monsterjäger", beschreibung: "Greife ein Monster an und töte es.", punkte: "11G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 16, name: "Kuhschubser", beschreibung: "Gewinne Leder.", punkte: "11G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 17, name: "Wenn Schweine fliegen", beschreibung: "Nutze eine Sattel, um ein Schwein zu reiten und füg ihm dann während des Reitens Fallschaden zu.", punkte: "69G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 18, name: "Alphawolf", beschreibung: "Freunde dich mit fünf Wölfen an.", punkte: "64G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 19, name: "Bestens ausgerüstet", beschreibung: "Konstruiere ein Exemplar von jedem Werkzeug (eine Spitzhacke, einen Spaten, eine Axt und eine Hacke).", punkte: "18G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 20, name: "Zum Verschießen", beschreibung: "Konstruiere einen Werfer.", punkte: "50G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 21, name: "In den Nether", beschreibung: "Konstruiere ein Netherportal.", punkte: "28G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 22, name: "Scharfschützenduell", beschreibung: "Töte ein Skelett mit einem Pfeil aus über 50 Metern Entfernung.", punkte: "80G", typ: "RARE", kategorie: "Base Game" },
+      { id: 23, name: "DIAMANTEN!", beschreibung: "Beschaffe mithilfe deiner Eisenwerkzeuge Diamanten.", punkte: "16G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 24, name: "Zurück zum Absender", beschreibung: "Zerstöre einen Ghast mit einem Feuerball.", punkte: "45G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 25, name: "Spiel mit dem Feuer", beschreibung: "Nimm einer Lohe ihre Rute.", punkte: "37G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 26, name: "Alchemie", beschreibung: "Braue einen Trank.", punkte: "42G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 27, name: "Das Ende?", beschreibung: "Betritt ein Endportal.", punkte: "45G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 28, name: "Das Ende.", beschreibung: "Töte den Enderdrachen.", punkte: "48G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 29, name: "Zauberer", beschreibung: "Konstruiere einen Zaubertisch.", punkte: "35G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 30, name: "Meister des Kampfes", beschreibung: "Verursache neun Herzen Schaden mit einem einzigen Schlag.", punkte: "36G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 31, name: "Bibliothekar", beschreibung: "Baue Bücherregale, um deinen Zaubertisch zu verbessern.", punkte: "30G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 32, name: "Abenteurerzeit", beschreibung: "Entdecke 17 der 40 Biome.", punkte: "14G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 33, name: "Nachzucht", beschreibung: "Züchte zwei Kühe mit Weizen.", punkte: "30G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 34, name: "Diamanten für dich!", beschreibung: "Wirf mit Diamanten nach einem anderen Spieler.", punkte: "32G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 35, name: "Schweinekotelett", beschreibung: "Koche und iss ein Stück Schweinekotelett.", punkte: "16G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 36, name: "Wie die Zeit vergeht", beschreibung: "Spiele 100 Tage lang.", punkte: "29G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 37, name: "Bogenschütze", beschreibung: "Töte einen Creeper mit Pfeilen.", punkte: "33G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 38, name: "Der Feilscher", beschreibung: "Erhalte 30 Smaragde durch Handel mit Dorfbewohnern oder Bergbau.", punkte: "34G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 39, name: "Topfbepflanzer", beschreibung: "Fertige einen Blumentopf an und platziere ihn.", punkte: "46G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 40, name: "Das ist ein Zeichen!", beschreibung: "Fertige ein Schild an und platziere es.", punkte: "28G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 41, name: "Starker Magen", beschreibung: "Verhindere den Hungertod mithilfe von verrottetem Fleisch.", punkte: "71G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 42, name: "Hab einen schaf-tastischen Tag", beschreibung: "Verwende eine Schere, um Wolle von einem Schaf zu erhalten.", punkte: "32G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 43, name: "Regenbogensammlung", beschreibung: "Sammle Wolle in allen 16 Farben.", punkte: "73G", typ: "RARE", kategorie: "Base Game" },
+      { id: 44, name: "Cool bleiben", beschreibung: "Schwimme in Lava, während du den Feuerresistenz-Effekt hast.", punkte: "53G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 45, name: "Bruchsteinreich", beschreibung: "Baue 1.728 Bruchsteine ab und lege sie in eine Truhe.", punkte: "46G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 46, name: "Erneuerbare Energie", beschreibung: "Verkohle Baumstämme mit Holzkohle, um mehr Holzkohle herzustellen.", punkte: "30G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 47, name: "Musik in meinen Ohren", beschreibung: "Spiele eine Schallplatte in einem Plattenspieler ab.", punkte: "46G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 48, name: "Leibwächter", beschreibung: "Erschaffe einen Eisengolem.", punkte: "67G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 49, name: "Eisenmann", beschreibung: "Trage eine komplette Eisenrüstung.", punkte: "18G", typ: "COMMON", kategorie: "Base Game" },
+      { id: 50, name: "Zombie-Doktor", beschreibung: "Heile einen Zombie-Dorfbewohner.", punkte: "60G", typ: "UNCOMMON", kategorie: "Base Game" },
+      { id: 51, name: "Löwenjäger", beschreibung: "Gewinne das Vertrauen eines Ozelots.", punkte: "73G", typ: "UNCOMMON", kategorie: "Base Game" },
 
-      // DLC TROPHY PACK 1
-      { id: 51, name: "Der Anfang?", beschreibung: "Erschaffe den Wither.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 1" },
-      { id: 52, name: "Der Anfang.", beschreibung: "Töte den Wither.", punkte: "40G", typ: "UNCOMMON", kategorie: "DLC Pack 1" },
-      { id: 53, name: "Leuchtturmwärter", beschreibung: "Erstelle ein Leuchtfeuer mit allen Kräften.", punkte: "60G", typ: "RARE", kategorie: "DLC Pack 1" },
-      { id: 54, name: "Übermächtig", beschreibung: "Iss einen Notch-Apfel.", punkte: "30G", typ: "UNCOMMON", kategorie: "DLC Pack 1" },
-      { id: 55, name: "Batik-Outfit", beschreibung: "Färbe die vier verschiedenen Teile der Lederrüstung.", punkte: "15G", typ: "UNCOMMON", kategorie: "DLC Pack 1" },
-      { id: 56, name: "Trampolin", beschreibung: "Lass dich von einem Schleimblock 30 Blöcke hoch zurückwerfen.", punkte: "15G", typ: "UNCOMMON", kategorie: "DLC Pack 1" },
+      // EXPANSION PACK 1
+      { id: 52, name: "Der Anfang?", beschreibung: "Spawne den Wither.", punkte: "83G", typ: "RARE", kategorie: "Expansion Pack 1" },
+      { id: 53, name: "Der Anfang.", beschreibung: "Töte den Wither.", punkte: "100G", typ: "EPIC", kategorie: "Expansion Pack 1" },
+      { id: 54, name: "Leuchtturmwärter", beschreibung: "Erstelle ein Leuchtfeuer und versorge es vollständig mit Energie.", punkte: "96G", typ: "RARE", kategorie: "Expansion Pack 1" },
+      { id: 55, name: "Übermächtig", beschreibung: "Iss einen Notch-Apfel.", punkte: "75G", typ: "RARE", kategorie: "Expansion Pack 1" },
+      { id: 56, name: "Trendfarben", beschreibung: "Färbe alle 4 einzigartigen Teile der Lederrüstung.", punkte: "123G", typ: "RARE", kategorie: "Expansion Pack 1" },
+      { id: 57, name: "Trampolin", beschreibung: "Lasse 30 Blöcke von einem Schleimblock nach oben prallen.", punkte: "117G", typ: "RARE", kategorie: "Expansion Pack 1" },
 
-      // DLC TROPHY PACK 2
-      { id: 57, name: "Der Student ...", beschreibung: "Gewinne ein öffentliches Kampf-Minispiel. [Nur Editions]", punkte: "10G", typ: "UNCOMMON", kategorie: "DLC Pack 2" },
-      { id: 58, name: "Und der Meister ist ...", beschreibung: "Gewinne 3 öffentliche Kampf-Minispiele in Folge. [Nur Editions]", punkte: "20G", typ: "RARE", kategorie: "DLC Pack 2" },
-      { id: 59, name: "Nur ein Kratzer", beschreibung: "Stecke 100 Schadenspunkte in einer Runde eines öffentlichen Kampfspiels ein. [Nur Editions]", punkte: "15G", typ: "VERY RARE", kategorie: "DLC Pack 2" },
-      { id: 60, name: "Amor", beschreibung: "Erledige 2 Spieler in einer Runde eines öffentlichen Kampf-Minispiels mit Pfeil und Bogen. [Nur Editions]", punkte: "20G", typ: "RARE", kategorie: "DLC Pack 2" },
-      { id: 61, name: "Hungerqualen", beschreibung: "Erledige einen Spieler in einem Kampf-Minispiel, während du ausgehungert bist. [Nur Editions]", punkte: "20G", typ: "RARE", kategorie: "DLC Pack 2" },
-      { id: 62, name: "Meins!", beschreibung: "Öffne in einer Runde jede Truhe in einer Kampf-Minispiel-Arena. [Nur Editions]", punkte: "30G", typ: "ULTRA RARE", kategorie: "DLC Pack 2" },
+      // EXPANSION PACK 3
+      { id: 58, name: "Das Ende ... mal wieder ...", beschreibung: "Lasse den Enderdrachen erneut erscheinen.", punkte: "126G", typ: "RARE", kategorie: "Expansion Pack 3" },
+      { id: 59, name: "Pfefferminz gefällig?", beschreibung: "Sammle Drachenatem in einer Glasflasche.", punkte: "125G", typ: "RARE", kategorie: "Expansion Pack 3" },
+      { id: 60, name: "Überschall", beschreibung: "Fliege mit Elytren mit mehr als 40 m/s durch einen Spalt, der 1 mal 1 Block misst.", punkte: "140G", typ: "RARE", kategorie: "Expansion Pack 3" },
+      { id: 61, name: "Auf dem Trockenen", beschreibung: "Trockne einen Schwamm in einem Ofen.", punkte: "118G", typ: "RARE", kategorie: "Expansion Pack 3" },
 
-      // DLC TROPHY PACK 3
-      { id: 63, name: "Das Ende ... mal wieder ...", beschreibung: "Lass den Enderdrachen erneut erscheinen.", punkte: "30G", typ: "UNCOMMON", kategorie: "DLC Pack 3" },
-      { id: 64, name: "Pfefferminz gefällig?", beschreibung: "Sammle Drachenodem in einer Glasflasche.", punkte: "30G", typ: "UNCOMMON", kategorie: "DLC Pack 3" },
-      { id: 65, name: "Super Sonic", beschreibung: "Fliege mit Elytren mit mehr als 40 m/s durch einen Spalt, der 1 mal 1 misst.", punkte: "30G", typ: "RARE", kategorie: "DLC Pack 3" },
-      { id: 66, name: "Trockenperiode", beschreibung: "Trockne einen Schwamm in einem Ofen.", punkte: "15G", typ: "UNCOMMON", kategorie: "DLC Pack 3" },
+      // EXPANSION PACK 4
+      { id: 62, name: "Freitaucher", beschreibung: "Bleibe 2 Minuten unter Wasser.", punkte: "82G", typ: "UNCOMMON", kategorie: "Expansion Pack 4" },
+      { id: 63, name: "Superbrennstoff", beschreibung: "Heize einen Ofen mit Lava.", punkte: "60G", typ: "UNCOMMON", kategorie: "Expansion Pack 4" },
+      { id: 64, name: "Aufsatteln", beschreibung: "Zähme ein Pferd.", punkte: "31G", typ: "UNCOMMON", kategorie: "Expansion Pack 4" },
+      { id: 65, name: "Schmecke deine eigene Medizin", beschreibung: "Vergifte eine Hexe mit einem Wurftrank.", punkte: "151G", typ: "RARE", kategorie: "Expansion Pack 4" },
+      { id: 66, name: "Beam mich hoch", beschreibung: "Teleportiere dich durch einen einzelnen Wurf einer Enderperle über mehr als 100 Meter.", punkte: "43G", typ: "UNCOMMON", kategorie: "Expansion Pack 4" },
+      { id: 67, name: "Kartenraum", beschreibung: "Hänge 9 vollständig erkundete, angrenzende Karten in 9 Gegenstandsrahmen im Quadrat (3 x 3) auf.", punkte: "155G", typ: "RARE", kategorie: "Expansion Pack 4" },
+      { id: 68, name: "Tarnung", beschreibung: "Töte eine Kreatur, während du den gleichen Typ von Kreaturen-Kopf trägst.", punkte: "127G", typ: "RARE", kategorie: "Expansion Pack 4" },
 
-      // DLC TROPHY PACK 4
-      { id: 67, name: "Freitaucher", beschreibung: "Bleibe 2 Minuten unter Wasser.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 4" },
-      { id: 68, name: "Superbrennstoff", beschreibung: "Betreibe einen Ofen mit Lava.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 4" },
-      { id: 69, name: "Aufsatteln", beschreibung: "Zähme ein Pferd.", punkte: "20G", typ: "COMMON", kategorie: "DLC Pack 4" },
-      { id: 70, name: "Gegengift", beschreibung: "Vergifte eine Hexe mit einem Wurftrank.", punkte: "20G", typ: "VERY RARE", kategorie: "DLC Pack 4" },
-      { id: 71, name: "Beam mich hoch", beschreibung: "Teleportiere dich über mehr als 100 Meter durch einen einzelnen Wurf einer Enderperle.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 4" },
-      { id: 72, name: "Kartenraum", beschreibung: "Platziere eine vollständig erkundete Karte in einem Gegenstandsrahmen.", punkte: "40G", typ: "VERY RARE", kategorie: "DLC Pack 4" },
-      { id: 73, name: "Gut getarnt", beschreibung: "Erledige einen NPC, während du den gleichen NPC-Kopf trägst.", punkte: "30G", typ: "RARE", kategorie: "DLC Pack 4" },
+      // EXPANSION PACK 6
+      { id: 69, name: "Das tiefe Ende", beschreibung: "Besiege einen Großwächter.", punkte: "114G", typ: "RARE", kategorie: "Expansion Pack 6" },
+      { id: 70, name: "Tolle Aussicht hier oben", beschreibung: "Schwebe vor den Angriffen eines Shulkers 50 Blöcke nach oben.", punkte: "163G", typ: "RARE", kategorie: "Expansion Pack 6" },
+      { id: 71, name: "Lakenwechsel", beschreibung: "Färbe dein Bett in einer anderen Farbe.", punkte: "58G", typ: "UNCOMMON", kategorie: "Expansion Pack 6" },
+      { id: 72, name: "Dem Tod entkommen", beschreibung: "Verwende das Totem der Unsterblichkeit, um dem Tod zu entkommen.", punkte: "69G", typ: "UNCOMMON", kategorie: "Expansion Pack 6" },
+      { id: 73, name: "Die Runde geht an mich ...", beschreibung: "Führe eine Karawane mit mindestens 5 Lamas.", punkte: "170G", typ: "RARE", kategorie: "Expansion Pack 6" },
+      { id: 74, name: "Lass los!", beschreibung: "Laufe mit den Eisläufer-Stiefeln mindestens 1 Block auf gefrorenem Wasser im tiefen Ozean.", punkte: "121G", typ: "RARE", kategorie: "Expansion Pack 6" },
+      { id: 75, name: "Das ist böse", beschreibung: "Besiege einen Magier.", punkte: "64G", typ: "UNCOMMON", kategorie: "Expansion Pack 6" },
 
-      // DLC TROPHY PACK 5
-      { id: 74, name: "Comeback", beschreibung: "Gewinne 3 Runden in Folge, nachdem einer der Gegner 2 Runden gewonnen hat. [Nur Editions]", punkte: "20G", typ: "RARE", kategorie: "DLC Pack 5" },
-      { id: 75, name: "Schneeballlos", beschreibung: "Gewinne eine Schneeball-Runde ohne einen einzigen Schneeball einzusetzen! [Nur Editions]", punkte: "20G", typ: "RARE", kategorie: "DLC Pack 5" },
-      { id: 76, name: "Schneesturm", beschreibung: "Triff in einer einzigen öffentlichen Runde einen einzelnen Spieler mit 25 Schneebällen. [Nur Editions]", punkte: "20G", typ: "VERY RARE", kategorie: "DLC Pack 5" },
-      { id: 77, name: "Heißblütig", beschreibung: "Triff einen Spieler beim Fallen in die Lava mit einem Schneeball. [Nur Editions]", punkte: "15G", typ: "UNCOMMON", kategorie: "DLC Pack 5" },
-      { id: 78, name: "Schneepflug", beschreibung: "Schubse in einer einzigen öffentlichen Runde drei Spieler mithilfe von Schneebällen in Lava. [Nur Editions]", punkte: "20G", typ: "RARE", kategorie: "DLC Pack 5" },
-      { id: 79, name: "Oberhand", beschreibung: "Bleibe auf der obersten Ebene, während du eine Runde beim Schneeball-Sturz-Minispiel gewinnst. [Nur Editions]", punkte: "15G", typ: "UNCOMMON", kategorie: "DLC Pack 5" },
-      { id: 80, name: "Underdog", beschreibung: "Gewinne ein Sturz-Spiel, während du dich auf der untersten Ebene in einem Schneeball-Sturz-Minispiel befindest. [Nur Editions]", punkte: "15G", typ: "UNCOMMON", kategorie: "DLC Pack 5" },
+      // EXPANSION PACK 7
+      { id: 76, name: "Meeresgurkentruppe", beschreibung: "Platziere vier Meeresgurken in einem Block.", punkte: "130G", typ: "RARE", kategorie: "Expansion Pack 7" },
+      { id: 77, name: "Alternativer Brennstoff", beschreibung: "Benutze einen getrockneten Seetang-Block im Ofen als Brennstoff.", punkte: "99G", typ: "UNCOMMON", kategorie: "Expansion Pack 7" },
+      { id: 78, name: "Mahlstrom", beschreibung: "Aktiviere einen Aquisator.", punkte: "139G", typ: "RARE", kategorie: "Expansion Pack 7" },
+      { id: 79, name: "Schiffbrüchiger", beschreibung: "Iss 3 Tage lang nur Seetang.", punkte: "183G", typ: "RARE", kategorie: "Expansion Pack 7" },
+      { id: 80, name: "Bei den Fischen schlafen", beschreibung: "Bleibe einen ganzen Tag lang unter Wasser, ohne Tränke einzusetzen.", punkte: "176G", typ: "RARE", kategorie: "Expansion Pack 7" },
+      { id: 81, name: "Echoortung", beschreibung: "Füttere einen Delfin mit rohem Kabeljau, damit er dich zu einem Schatz führt.", punkte: "127G", typ: "RARE", kategorie: "Expansion Pack 7" },
 
-      // DLC TROPHY PACK 6
-      { id: 81, name: "Das tiefe Ende", beschreibung: "Besiege einen großen Wächter.", punkte: "30G", typ: "RARE", kategorie: "DLC Pack 6" },
-      { id: 82, name: "Tolle Aussicht hier oben", beschreibung: "Schwebe vor den Angriffen eines Shulkers 50 Blöcke nach oben.", punkte: "20G", typ: "VERY RARE", kategorie: "DLC Pack 6" },
-      { id: 83, name: "Lakenwechsel", beschreibung: "Färbe dein Bett in einer anderen Farbe.", punkte: "15G", typ: "UNCOMMON", kategorie: "DLC Pack 6" },
-      { id: 84, name: "Von der Schippe gesprungen", beschreibung: "Springe dem Tod mit dem Totem der Unsterblichkeit von der Schippe.", punkte: "30G", typ: "UNCOMMON", kategorie: "DLC Pack 6" },
-      { id: 85, name: "Läuft gar nicht so schlecht für mich ...", beschreibung: "Führe eine Karawane mit mindestens 5 Lamas an.", punkte: "20G", typ: "VERY RARE", kategorie: "DLC Pack 6" },
-      { id: 86, name: "Alles läuft glatt!", beschreibung: "Laufe mit den Frostläufer-Stiefeln auf mindestens einem Block über gefrorenem Wasser in der Tiefsee.", punkte: "20G", typ: "RARE", kategorie: "DLC Pack 6" },
-      { id: 87, name: "Unwohlsein", beschreibung: "Besiege einen Magier.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 6" },
+      // EXPANSION PACK 8
+      { id: 82, name: "Mache eine Fassrolle", beschreibung: "Verwende Sog, um dir selbst Schub zu verleihen.", punkte: "108G", typ: "UNCOMMON", kategorie: "Expansion Pack 8" },
+      { id: 83, name: "Meeresbiologe", beschreibung: "Sammle einen beliebigen Fisch in einem Eimer ein.", punkte: "77G", typ: "UNCOMMON", kategorie: "Expansion Pack 8" },
+      { id: 84, name: "Ahoy!", beschreibung: "Entdecke ein Schiffswrack.", punkte: "32G", typ: "UNCOMMON", kategorie: "Expansion Pack 8" },
+      { id: 85, name: "Dach der Welt", beschreibung: "Baue einen Turm aus Gerüsten, der die maximale Bauhöhe erreicht.", punkte: "150G", typ: "RARE", kategorie: "Expansion Pack 8" },
+      { id: 86, name: "Wo bist du herumgesummt?", beschreibung: "Erhalte am Morgen ein Geschenk von einer gezähmten Katze.", punkte: "107G", typ: "UNCOMMON", kategorie: "Expansion Pack 8" },
+      { id: 87, name: "Zoologe", beschreibung: "Züchte zwei Pandas mit Bambus.", punkte: "153G", typ: "RARE", kategorie: "Expansion Pack 8" },
 
-      // DLC TROPHY PACK 7
-      { id: 88, name: "Gurken-Viertel", beschreibung: "Platziere vier Meeresgurken in einem Block.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 7" },
-      { id: 89, name: "Alternativer Brennstoff", beschreibung: "Verwende einen getrockneten Seetang-Block als Brennstoff in einem Ofen.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 7" },
-      { id: 90, name: "Mahlstrom", beschreibung: "Aktiviere einen Aquisator.", punkte: "50G", typ: "RARE", kategorie: "DLC Pack 7" },
-      { id: 91, name: "Schiffbrüchig", beschreibung: "Iss 3 Tage lang nichts außer Seetang.", punkte: "20G", typ: "RARE", kategorie: "DLC Pack 7" },
-      { id: 92, name: "Schwimmhäute", beschreibung: "Bleib einen ganzen Tag lang unter Wasser, ohne Tränke einzusetzen.", punkte: "30G", typ: "RARE", kategorie: "DLC Pack 7" },
-      { id: 93, name: "Echolotung", beschreibung: "Füttere einen Delfin mit rohem Kabeljau und lass dich von ihm zum Schatz locken.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 7" },
+      // EXPANSION PACK 9
+      { id: 88, name: "Atlantis?", beschreibung: "Finde eine Unterwasserruine.", punkte: "34G", typ: "UNCOMMON", kategorie: "Expansion Pack 9" },
+      { id: 89, name: "Organisationstalent", beschreibung: "Beschrifte eine Shulker-Kiste mit einem Amboss.", punkte: "134G", typ: "RARE", kategorie: "Expansion Pack 9" },
+      { id: 90, name: "Früchte des Webstuhls", beschreibung: "Fertige ein Banner mit einem verzauberten Apfel an.", punkte: "170G", typ: "RARE", kategorie: "Expansion Pack 9" },
+      { id: 91, name: "Tausend Katzen", beschreibung: "Freunde dich mit zwanzig streunenden Katzen an.", punkte: "187G", typ: "RARE", kategorie: "Expansion Pack 9" },
+      { id: 92, name: "Die sieben Weltmeere", beschreibung: "Besuche alle Ozean-Biome.", punkte: "66G", typ: "UNCOMMON", kategorie: "Expansion Pack 9" },
 
-      // DLC TROPHY PACK 8
-      { id: 94, name: "Mach eine Fassrolle", beschreibung: "Setze den Sog ein, um dir selbst einen Schub zu verpassen.", punkte: "30G", typ: "RARE", kategorie: "DLC Pack 8" },
-      { id: 95, name: "Meeresbiologe", beschreibung: "Sammle einen beliebigen Fisch in einem Eimer.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 8" },
-      { id: 96, name: "Ahoi!", beschreibung: "Entdecke ein Schiffswrack.", punkte: "20G", typ: "COMMON", kategorie: "DLC Pack 8" },
-      { id: 97, name: "Dach der Welt", beschreibung: "Baue einen Turm aus Gerüsten, der die maximale Gebäudehöhe erreicht.", punkte: "20G", typ: "VERY RARE", kategorie: "DLC Pack 8" },
-      { id: 98, name: "Wo bist du gewesen?", beschreibung: "Erhalte ein Geschenk am Morgen von einer gezähmten Katze.", punkte: "20G", typ: "RARE", kategorie: "DLC Pack 8" },
-      { id: 99, name: "Zoologe", beschreibung: "Bringe zwei Pandas mit Bambus dazu, ein Junges zu zeugen.", punkte: "40G", typ: "RARE", kategorie: "DLC Pack 8" },
+      // EXPANSION PACK 10
+      { id: 93, name: "Gewinn um jeden Preis", beschreibung: "Für bestmöglichen Preis eintauschen.", punkte: "58G", typ: "UNCOMMON", kategorie: "Expansion Pack 10" },
+      { id: 94, name: "Entzaubert", beschreibung: "Nutze einen Schleifstein, um von einem verzauberten Gegenstand Erfahrung zu erhalten.", punkte: "46G", typ: "UNCOMMON", kategorie: "Expansion Pack 10" },
+      { id: 95, name: "Ich hab dabei ein schlechtes Gefühl", beschreibung: "Töte einen Plünderer-Hauptmann.", punkte: "39G", typ: "UNCOMMON", kategorie: "Expansion Pack 10" },
+      { id: 96, name: "Nieder mit der Bestie!", beschreibung: "Besiege einen Verwüster.", punkte: "67G", typ: "UNCOMMON", kategorie: "Expansion Pack 10" },
+      { id: 97, name: "Schlagt Alarm!", beschreibung: "Läute die Glocke, wenn sich ein Gegner im Dorf befindet.", punkte: "45G", typ: "UNCOMMON", kategorie: "Expansion Pack 10" },
+      { id: 98, name: "Wir werden angegriffen!", beschreibung: "Löse einen Plünderer-Überfall aus.", punkte: "72G", typ: "UNCOMMON", kategorie: "Expansion Pack 10" },
 
-      // DLC TROPHY PACK 9
-      { id: 100, name: "Atlantis?", beschreibung: "Finde eine Unterwasserruine.", punkte: "20G", typ: "COMMON", kategorie: "DLC Pack 9" },
-      { id: 101, name: "Organisationstalent", beschreibung: "Benenne eine Shulkerkiste mit einem Amboss.", punkte: "30G", typ: "RARE", kategorie: "DLC Pack 9" },
-      { id: 102, name: "Fahnenfrucht", beschreibung: "Stelle ein Banner mit einem verzauberten Apfel her.", punkte: "20G", typ: "VERY RARE", kategorie: "DLC Pack 9" },
-      { id: 103, name: "Katzen in Hülle und Fülle", beschreibung: "Freunde dich mit zwanzig streunenden Katzen an.", punkte: "20G", typ: "VERY RARE", kategorie: "DLC Pack 9" },
-      { id: 104, name: "Die 7 Meere befahren", beschreibung: "Befahre alle Ozean-Biome.", punkte: "40G", typ: "UNCOMMON", kategorie: "DLC Pack 9" },
+      // EXPANSION PACK 11
+      { id: 99, name: "Frachtstation", beschreibung: "Verwende einen Trichter, um einen Gegenstand aus einer Güterlore zu einer Truhe zu bewegen. [Nur in Bedrock]", punkte: "153G", typ: "RARE", kategorie: "Expansion Pack 11" },
+      { id: 100, name: "Alles schmilzt!", beschreibung: "Verbinde drei Truhen mit einem einzigen Ofen mit drei Trichtern. [Nur in Bedrock]", punkte: "90G", typ: "UNCOMMON", kategorie: "Expansion Pack 11" },
+      { id: 101, name: "Der Anfang", beschreibung: "Drücke einen Kolben mit einem Kolben, ziehe dann den Originalkolben mit diesem Kolben. [Nur in Bedrock]", punkte: "157G", typ: "RARE", kategorie: "Expansion Pack 11" },
+      { id: 102, name: "Künstliche Selektion", beschreibung: "Züchte ein Maultier aus einem Pferd und einem Esel. [Nur in Bedrock]", punkte: "168G", typ: "RARE", kategorie: "Expansion Pack 11" },
+      { id: 103, name: "Kaninchensaison", beschreibung: "Koche und iss ein Stück Kaninchenfleisch. [Nur in Bedrock]", punkte: "79G", typ: "UNCOMMON", kategorie: "Expansion Pack 11" },
+      { id: 104, name: "Schatzjäger", beschreibung: "Kauf eine Ozeanentdecker- oder Waldentdeckerkarte von einem Dorfbewohner und betritt dann die aufgedeckte Struktur. [Nur in Bedrock]", punkte: "187G", typ: "RARE", kategorie: "Expansion Pack 11" },
+      { id: 105, name: "Mein Schatz!", beschreibung: "Grabe einen Schatz aus. [Nur in Bedrock]", punkte: "75G", typ: "UNCOMMON", kategorie: "Expansion Pack 11" },
+      { id: 106, name: "Meisterhändler", beschreibung: "Handle Waren im Wert von 1.000 Smaragden. [Nur in Bedrock]", punkte: "136G", typ: "RARE", kategorie: "Expansion Pack 11" },
 
-      // DLC TROPHY PACK 10
-      { id: 105, name: "Mit Gewinn verkaufen", beschreibung: "Handle für den bestmöglichen Preis.", punkte: "50G", typ: "UNCOMMON", kategorie: "DLC Pack 10" },
-      { id: 106, name: "Entzaubert", beschreibung: "Nutze einen Schleifstein, um Erfahrung von einem verzauberten Gegenstand zu erlangen.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 10" },
-      { id: 107, name: "Ich habe ein mieses Gefühl dabei", beschreibung: "Besiege einen Plünderer-Anführer.", punkte: "20G", typ: "COMMON", kategorie: "DLC Pack 10" },
-      { id: 108, name: "Töte die Bestie!", beschreibung: "Besiege einen Verwüster.", punkte: "30G", typ: "UNCOMMON", kategorie: "DLC Pack 10" },
-      { id: 109, name: "Läute den Alarm!", beschreibung: "Läute die Glocke mit einem feindlichen Gegner im Dorf.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 10" },
-      { id: 110, name: "Wir werden angegriffen!", beschreibung: "Löse einen Plünderer-Überfall aus.", punkte: "20G", typ: "UNCOMMON", kategorie: "DLC Pack 10" },
+      // EXPANSION PACK 12
+      { id: 107, name: "Zeit für ein Süppchen", beschreibung: "Gib jemandem eine verdächtige Suppe. [Nur in Bedrock]", punkte: "156G", typ: "RARE", kategorie: "Expansion Pack 12" },
+      { id: 108, name: "Biene-venu", beschreibung: "Fülle mithilfe eines Lagerfeuers Honig aus dem Bienenstock in eine Flasche, ohne die Bienen zu stören. [Nur in Bedrock]", punkte: "135G", typ: "RARE", kategorie: "Expansion Pack 12" },
+      { id: 109, name: "Kompletter Summzug", beschreibung: "Setze Behutsamkeit ein, um ein Bienennest mit 3 Bienen darin zu bewegen und zu platzieren. [Nur in Bedrock]", punkte: "138G", typ: "RARE", kategorie: "Expansion Pack 12" },
+      { id: 110, name: "Klebrige Angelegenheit", beschreibung: "Rutsche einen Honigblock hinab, um deinen Fall zu verlangsamen. [Nur in Bedrock]", punkte: "148G", typ: "RARE", kategorie: "Expansion Pack 12" },
 
-      // DLC TROPHY PACK 11
-      { id: 111, name: "Güterbahnhof", beschreibung: "Bewege einen Gegenstand mit einem Trichter von einer Lore mit Truhe in eine Truhe. [Nur Bedrock]", punkte: "15G", typ: "VERY RARE", kategorie: "DLC Pack 11" },
-      { id: 112, name: "Alles geschmolzen!", beschreibung: "Verbinde mit drei Trichtern drei Truhen zu einem einzigen Schmelzofen. [Nur Bedrock]", punkte: "15G", typ: "UNCOMMON", kategorie: "DLC Pack 11" },
-      { id: 113, name: "Auf Anfang", beschreibung: "Schiebe einen Kolben mit einem Kolben und ziehe dann den ursprünglichen Kolben mit diesem Kolben. [Nur Bedrock]", punkte: "20G", typ: "VERY RARE", kategorie: "DLC Pack 11" },
-      { id: 114, name: "Künstliche Selektion", beschreibung: "Züchte ein Maultier aus einem Pferd und einem Esel. [Nur Bedrock]", punkte: "30G", typ: "VERY RARE", kategorie: "DLC Pack 11" },
-      { id: 115, name: "Kaninchensaison", beschreibung: "Koche und iss Kaninchenfleisch. [Nur Bedrock]", punkte: "15G", typ: "UNCOMMON", kategorie: "DLC Pack 11" },
-      { id: 116, name: "Schatzjäger", beschreibung: "Erwirb eine Karte von einem Kartografen-Dorfbewohner und betritt dann das aufgezeigte Bauwerk. [Nur Bedrock]", punkte: "40G", typ: "VERY RARE", kategorie: "DLC Pack 11" },
-      { id: 117, name: "Goldrausch!", beschreibung: "Grabe einen verborgenen Schatz aus. [Nur Bedrock]", punkte: "30G", typ: "UNCOMMON", kategorie: "DLC Pack 11" },
-      { id: 118, name: "Meisterhändler", beschreibung: "Tausche für 1.000 Smaragde. [Nur Bedrock]", punkte: "30G", typ: "VERY RARE", kategorie: "DLC Pack 11" },
+      // EXPANSION PACK 13
+      { id: 111, name: "Volltreffer", beschreibung: "Triff bei einem Ziel-Block mitten ins Ziel. [Nur in Bedrock]", punkte: "153G", typ: "RARE", kategorie: "Expansion Pack 13" },
+      { id: 112, name: "Trümmermode", beschreibung: "Trage ein komplettes Rüstungsset aus Netherit. [Nur in Bedrock]", punkte: "54G", typ: "UNCOMMON", kategorie: "Expansion Pack 13" },
+      { id: 113, name: "Ach, wie goldig!", beschreibung: "Lenke ein Piglin mit Gold ab. [Nur in Bedrock]", punkte: "105G", typ: "UNCOMMON", kategorie: "Expansion Pack 13" },
+      { id: 114, name: "Touristen-Hotspot", beschreibung: "Besuche alle Nether-Biome. [Nur in Bedrock]", punkte: "39G", typ: "UNCOMMON", kategorie: "Expansion Pack 13" },
 
-      // DLC TROPHY PACK 12
-      { id: 119, name: "Suppenzeit", beschreibung: "Gib jemandem eine verdächtige Suppe. [Nur Bedrock]", punkte: "20G", typ: "RARE", kategorie: "DLC Pack 12" },
-      { id: 120, name: "Bienenfreundschaft", beschreibung: "Nutze ein Lagerfeuer, um mit einer Flasche Honig aus einem Bienenstock zu sammeln, ohne die Bienen zu ärgern. [Nur Bedrock]", punkte: "15G", typ: "UNCOMMON", kategorie: "DLC Pack 12" },
-      { id: 121, name: "Bienenumzug", beschreibung: "Bewege mit Behutsamkeit ein Bienennest mit drei Bienen. [Nur Bedrock]", punkte: "30G", typ: "RARE", kategorie: "DLC Pack 12" },
-      { id: 122, name: "Klebrige Situation", beschreibung: "Rutsche einen Honigblock hinab, um deinen Fall zu verlangsamen. [Nur Bedrock]", punkte: "30G", typ: "RARE", kategorie: "DLC Pack 12" },
+      // EXPANSION PACK 14
+      { id: 115, name: "Mäh-chtig viel Wasserspaß", beschreibung: "Steig in ein Boot und paddle mit einer Ziege.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 14" },
+      { id: 116, name: "Wie gewachst", beschreibung: "Trage Wachs auf alle Kupferblöcke auf und entferne es wieder!", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 14" },
+      { id: 117, name: "Die heilende Kraft der Freundschaft", beschreibung: "Tu dich mit einem Axolotl zusammen und gewinne einen Kampf.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 14" },
 
-      // DLC TROPHY PACK 13
-      { id: 123, name: "Volltreffer", beschreibung: "Triff bei einem Ziel-Block die Zielmitte [Nur Bedrock]", punkte: "15G", typ: "RARE", kategorie: "DLC Pack 13" },
-      { id: 124, name: "Trümmermode", beschreibung: "Trage ein komplettes Rüstungsset aus Netherit [Nur Bedrock]", punkte: "50G", typ: "UNCOMMON", kategorie: "DLC Pack 13" },
-      { id: 125, name: "Ach, wie goldig!", beschreibung: "Lenke ein Schweini mit Gold ab [Nur Bedrock]", punkte: "30G", typ: "RARE", kategorie: "DLC Pack 13" },
-      { id: 126, name: "Touristen-Hotspot", beschreibung: "Besuche alle Nether-Biome [Nur Bedrock]", punkte: "30G", typ: "UNCOMMON", kategorie: "DLC Pack 13" }
-  ];
+      // EXPANSION PACK 15
+      { id: 118, name: "Höhlen und Klippen", beschreibung: "Stürze im freien Fall von der maximalen Bauhöhe bis zum tiefsten Punkt der Welt und überlebe das Ganze.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 15" },
+      { id: 119, name: "Händler unter den Sternen", beschreibung: "Handle auf der maximalen Bauhöhe mit einem Dorfbewohner.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 15" },
+      { id: 120, name: "Lauschet nur der Musik!", beschreibung: "Verbreite mit den Klängen eines Plattenspielers Frohsinn auf der Wiese.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 15" },
+      { id: 121, name: "Fast wie daheim", beschreibung: "Mach mit deinem Schreiter einen Ausritt über einen Lavasee auf der Oberwelt und lege dabei eine Entfernung von 50 m zurück.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 15" },
 
+      // EXPANSION PACK 16
+      { id: 122, name: "Es verbreitet sich", beschreibung: "Töte einen Mob neben einem Katalysator.", punkte: "10G", typ: "COMMON", kategorie: "Expansion Pack 16" },
+      { id: 123, name: "Geburtstagslied", beschreibung: "Lassen Sie einen Hilfsgeist einen Kuchen auf einen Notenblock fallen.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 16" },
+      { id: 124, name: "Mit vereinten Kräften!", beschreibung: "Habe alle 3 Froschlichter in deinem Inventar.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 16" },
+      { id: 125, name: "Sneak 100", beschreibung: "Schleichen Sie sich neben einen Sculk Sensor, ohne ihn auszulösen.", punkte: "15G", typ: "RARE", kategorie: "Expansion Pack 16" },
+
+      // EXPANSION PACK 17
+      { id: 126, name: "Die Vergangenheit pflanzen", beschreibung: "Pflanze einen beliebigen Schnüffler-Samen.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 17" },
+      { id: 127, name: "Sorgfältige Instandsetzung", beschreibung: "Stelle einen dekorierten Topf aus 4 Keramikscherben her.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 17" },
+      { id: 128, name: "Schmieden mit Stil", beschreibung: "Nutze Schmiedevorlage Turm, Schnauze, Rippe, Schutz, Stille, Plagegeist, Gezeiten, Wegweiser min. 1x.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 17" },
+
+      // EXPANSION PACK 18
+      { id: 129, name: "Aufwieglerisch", beschreibung: "Schalte einen Tresor mit einem ominösen Prüfungsschlüssel frei.", punkte: "10G", typ: "RARE", kategorie: "Expansion Pack 18" },
+      { id: 130, name: "Werker fertigen Werker", beschreibung: "Sei in der Nähe eines Werkers, wenn er einen Werker anfertigt.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 18" },
+      { id: 131, name: "Wer braucht schon Raketen?", beschreibung: "Benutze eine Windkugel, um dich 8 Blöcke nach oben zu katapultieren.", punkte: "7G", typ: "UNCOMMON", kategorie: "Expansion Pack 18" },
+      { id: 132, name: "Over-Overkill", beschreibung: "Verursache 50 Herzen Schaden mit einem einzigen Treffer mit dem Streitkolben.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 18" },
+
+      // EXPANSION PACK 19
+      { id: 133, name: "Herztransplanteur", beschreibung: "Platziere ein Knarzherz mit der richtigen Ausrichtung zwischen zwei Blasseichenstamm-Blöcken.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 19" },
+
+      // EXPANSION PACK 20
+      { id: 134, name: "Immer genug trinken!", beschreibung: "Platzier einen getrockneten Ghast-Block im Wasser.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 20" },
+    ];
   // ------------------------------------------------------------
   // 3. UI Grundstruktur
   // ------------------------------------------------------------
@@ -202,15 +220,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded text-xs sm:text-sm">Abmelden</button>
       </div>
 
-      <!-- 📱 Mobile Filter Buttons -->
-      <div id="mobileFilters" class="hidden sm:hidden flex-wrap gap-2 justify-center text-center"> <!-- <-- neu -->
+      <div id="mobileFilters" class="hidden sm:hidden flex-wrap gap-2 justify-center text-center">
         <button id="filterAll" class="bg-yellow-500/80 text-black px-3 py-1 rounded text-xs font-semibold w-20">Alle</button>
         <button id="filterOpen" class="bg-yellow-500/80 text-black px-3 py-1 rounded text-xs font-semibold w-20">Offen</button>
         <button id="filterDone" class="bg-yellow-500/80 text-black px-3 py-1 rounded text-xs font-semibold w-20">Fertig</button>
       </div>
     </div>
 
-    <!-- Dashboard -->
     <div id="dashboard" class="mb-6 grid grid-cols-4 gap-2 text-center">
       <div id="dash-done-wrapper" class="bg-yellow-500/80 text-black rounded p-2 cursor-pointer">
         <div id="dash-done" class="text-xl font-bold">0</div>
@@ -253,12 +269,27 @@ document.addEventListener("DOMContentLoaded", () => {
     kategorien[e.kategorie].push(e);
   });
 
-  // ------------------------------------------------------------
-  // 5. Render-Funktion
-  // ------------------------------------------------------------
-  function render() {
-    container.innerHTML = "";
+  // ============================================================
+  // FIX: Funktion zum Aktualisieren einer einzelnen Karte
+  // ============================================================
+  function updateCardOnly(erfolg) {
+    const checkbox = document.querySelector(`[data-erfolg-id="${erfolg.id}"] .checkbox`);
+    const card = document.querySelector(`[data-erfolg-id="${erfolg.id}"]`);
+    
+    if (checkbox && card) {
+      const checked = erfolgStatus[erfolg.id] || false;
+      checkbox.textContent = checked ? "✓" : "";
+      checkbox.classList.toggle("checked", checked);
+      card.classList.toggle("success-card", checked);
+    }
 
+    updateDashboard();
+  }
+
+  // ============================================================
+  // FIX: Dashboard aktualisieren (ohne Kategorien neu zu rendern)
+  // ============================================================
+  function updateDashboard() {
     const doneCount = erfolge.filter(e => erfolgStatus[e.id]).length;
     const openCount = erfolge.length - doneCount;
     const progressPercent = ((doneCount / erfolge.length) * 100).toFixed(1);
@@ -266,6 +297,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("dash-done").textContent = doneCount;
     document.getElementById("dash-open").textContent = openCount;
     document.getElementById("dash-progress").textContent = `${progressPercent}%`;
+  }
+
+  // ------------------------------------------------------------
+  // 5. Render-Funktion (VOLLSTÄNDIGER Neubau)
+  // ------------------------------------------------------------
+  function render() {
+    container.innerHTML = "";
+
+    updateDashboard();
 
     const doneW = document.getElementById("dash-done-wrapper");
     const openW = document.getElementById("dash-open-wrapper");
@@ -333,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const card = document.createElement("div");
         card.className = `card ${checked ? "success-card" : ""}`;
-        card.dataset.name = erfolg.name.toLowerCase();
+        card.dataset.erfolg_id = erfolg.id;
 
         card.innerHTML = `
           <div class="flex justify-between items-start w-full">
@@ -348,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="text-[0.55rem] uppercase text-gray-300">${erfolg.typ}</div>
               </div>
               <div class="checkbox ${checked ? "checked" : ""} w-5 h-5 flex items-center justify-center border border-yellow-400 rounded-sm">
-                ${checked ? "✔" : ""}
+                ${checked ? "✓" : ""}
               </div>
             </div>
           </div>
@@ -364,13 +404,8 @@ document.addEventListener("DOMContentLoaded", () => {
           erfolgStatus[erfolg.id] = !erfolgStatus[erfolg.id];
           localStorage.setItem(storageKey, JSON.stringify(erfolgStatus));
 
-          if (currentSearchTerm.trim() === "") render();
-          else {
-            const box = e.target;
-            box.classList.toggle("checked");
-            card.classList.toggle("success-card");
-            box.textContent = box.classList.contains("checked") ? "✔" : "";
-          }
+          // FIX: Nur diese Karte aktualisieren, nicht alles neu rendern
+          updateCardOnly(erfolg);
         });
 
         grid.appendChild(card);
@@ -389,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ------------------------------------------------------------
-  // 7. Klick-Logik: Fertig & Offen Filter (Dashboard)
+  // 7. Dashboard Filter (Fertig & Offen)
   // ------------------------------------------------------------
   document.getElementById("dash-done-wrapper").addEventListener("click", () => {
     showCompletedOnly = !showCompletedOnly;
@@ -404,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ------------------------------------------------------------
-  // 8. 📱 Mobile Filter Buttons (neu)
+  // 8. Mobile Filter Buttons
   // ------------------------------------------------------------
   const btnAll = document.getElementById("filterAll");
   const btnOpen = document.getElementById("filterOpen");
