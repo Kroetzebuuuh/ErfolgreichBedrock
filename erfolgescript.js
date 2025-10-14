@@ -211,7 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
       { id: 134, name: "Immer genug trinken!", beschreibung: "Platzier einen getrockneten Ghast-Block im Wasser.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 20" },
     ];
 
-
   // ------------------------------------------------------------
   // 3. UI Grundstruktur
   // ------------------------------------------------------------
@@ -389,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="flex justify-between items-start w-full">
             <div class="flex flex-col">
               <div class="text-xs mb-1">${erfolg.name}</div>
-              <div class="beschreibung hidden mt-1 text-[0.6rem] opacity-80">${erfolg.beschreibung}</div>
+              <div class="beschreibung mt-1 text-[0.6rem] opacity-80">${erfolg.beschreibung}</div>
             </div>
 
             <div class="flex items-center gap-2">
@@ -406,7 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         card.addEventListener("click", e => {
           if (e.target.classList.contains("checkbox")) return;
-          card.querySelector(".beschreibung").classList.toggle("hidden");
+          card.classList.toggle("expanded");
         });
 
         card.querySelector(".checkbox").addEventListener("click", e => {
