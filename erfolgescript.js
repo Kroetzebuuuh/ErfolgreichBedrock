@@ -210,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // EXPANSION PACK 20
       { id: 134, name: "Immer genug trinken!", beschreibung: "Platzier einen getrockneten Ghast-Block im Wasser.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 20" },
     ];
+
   // ------------------------------------------------------------
   // 3. UI Grundstruktur
   // ------------------------------------------------------------
@@ -273,11 +274,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // FIX: Funktion zum Aktualisieren einer einzelnen Karte
   // ============================================================
   function updateCardOnly(erfolg) {
-    const checkbox = document.querySelector(`[data-erfolg-id="${erfolg.id}"] .checkbox`);
     const card = document.querySelector(`[data-erfolg-id="${erfolg.id}"]`);
     
-    if (checkbox && card) {
+    if (card) {
+      const checkbox = card.querySelector(".checkbox");
       const checked = erfolgStatus[erfolg.id] || false;
+      
       checkbox.textContent = checked ? "✓" : "";
       checkbox.classList.toggle("checked", checked);
       card.classList.toggle("success-card", checked);
@@ -373,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const card = document.createElement("div");
         card.className = `card ${checked ? "success-card" : ""}`;
-        card.dataset.erfolg_id = erfolg.id;
+        card.setAttribute("data-erfolg-id", erfolg.id);
 
         card.innerHTML = `
           <div class="flex justify-between items-start w-full">
