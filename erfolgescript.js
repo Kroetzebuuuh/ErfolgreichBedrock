@@ -211,6 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { id: 134, name: "Immer genug trinken!", beschreibung: "Platzier einen getrockneten Ghast-Block im Wasser.", punkte: "5G", typ: "UNCOMMON", kategorie: "Expansion Pack 20" },
     ];
 
+
   // ------------------------------------------------------------
   // 3. UI Grundstruktur
   // ------------------------------------------------------------
@@ -271,25 +272,30 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ============================================================
-  // FIX: Funktion zum Aktualisieren einer einzelnen Karte
+  // FIX: Speichere Scroll-Positionen vor dem Render
   // ============================================================
-  function updateCardOnly(erfolg) {
-    const card = document.querySelector(`[data-erfolg-id="${erfolg.id}"]`);
-    
-    if (card) {
-      const checkbox = card.querySelector(".checkbox");
-      const checked = erfolgStatus[erfolg.id] || false;
-      
-      checkbox.textContent = checked ? "✓" : "";
-      checkbox.classList.toggle("checked", checked);
-      card.classList.toggle("success-card", checked);
-    }
+  function getScrollPositions() {
+    const scrollMap = {};
+    document.querySelectorAll(".category-content.open").forEach(content => {
+      const header = content.previousElementSibling;
+      const katName = header.querySelector(".title").textContent;
+      scrollMap[katName] = content.scrollTop;
+    });
+    return scrollMap;
+  }
 
-    updateDashboard();
+  function restoreScrollPositions(scrollMap) {
+    document.querySelectorAll(".category-content.open").forEach(content => {
+      const header = content.previousElementSibling;
+      const katName = header.querySelector(".title").textContent;
+      if (scrollMap[katName] !== undefined) {
+        content.scrollTop = scrollMap[katName];
+      }
+    });
   }
 
   // ============================================================
-  // FIX: Dashboard aktualisieren (ohne Kategorien neu zu rendern)
+  // FIX: Dashboard aktualisieren
   // ============================================================
   function updateDashboard() {
     const doneCount = erfolge.filter(e => erfolgStatus[e.id]).length;
@@ -305,6 +311,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // 5. Render-Funktion (VOLLSTÄNDIGER Neubau)
   // ------------------------------------------------------------
   function render() {
+    // Scroll-Positionen speichern
+    const scrollPositions = getScrollPositions();
+
     container.innerHTML = "";
 
     updateDashboard();
@@ -375,7 +384,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const card = document.createElement("div");
         card.className = `card ${checked ? "success-card" : ""}`;
-        card.setAttribute("data-erfolg-id", erfolg.id);
 
         card.innerHTML = `
           <div class="flex justify-between items-start w-full">
@@ -406,8 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
           erfolgStatus[erfolg.id] = !erfolgStatus[erfolg.id];
           localStorage.setItem(storageKey, JSON.stringify(erfolgStatus));
 
-          // FIX: Nur diese Karte aktualisieren, nicht alles neu rendern
-          updateCardOnly(erfolg);
+          render();
         });
 
         grid.appendChild(card);
@@ -415,6 +422,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       container.appendChild(wrapper);
     });
+
+    // Scroll-Positionen wiederherstellen
+    setTimeout(() => restoreScrollPositions(scrollPositions), 0);
   }
 
   // ------------------------------------------------------------
