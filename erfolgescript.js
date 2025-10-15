@@ -33,6 +33,43 @@ document.addEventListener("DOMContentLoaded", () => {
   let showCompletedOnly = false;
   let showOpenOnly = false;
 
+  // Bild-Codes für die Erfolge (aus Exophase extrahiert)
+  const bildCodes = {
+    1: "5570j635", 2: "0034ebd3", 3: "8j5d7e66", 4: "ee30561g", 5: "40e7d416",
+    6: "6d741b5b", 7: "b8gd1e6b", 8: "gj1b4g3e", 9: "dg07e413", 10: "j067g453",
+    11: "137b6g06", 12: "3571gj01", 13: "770b3g5j", 14: "5570j6g5", 15: "0034ebj3",
+    16: "8j5d7e06", 17: "ee30566g", 18: "40e7d4b6", 19: "6d741b3b", 20: "b8gd1e4b",
+    21: "gj1b4g5e", 22: "dg07e4b3", 23: "j067g4e3", 24: "137b6gj6", 25: "3571gj61",
+    26: "770b3gdj", 27: "5570j6b5", 28: "0034eb13", 29: "8j5d7e46", 30: "ee30568g",
+    31: "40e7d466", 32: "6d741bgb", 33: "b8gd1e3b", 34: "gj1b4g7e", 35: "dg07e483",
+    36: "j067g413", 37: "137b6g16", 38: "3571gj41", 39: "770b3ggj", 40: "5570j665",
+    41: "0034ebb3", 42: "8j5d7ee6", 43: "ee30566g", 44: "40e7d446", 45: "6d741bbb",
+    46: "b8gd1eeb", 47: "gj1b4gge", 48: "dg07e443", 49: "j067g443", 50: "137b6gg6",
+    51: "3571gjj1", 52: "770b3g6j", 53: "40e7d4j0", 54: "6d741be7", 55: "b8gd1eb6",
+    56: "gj1b4g85", 57: "dg07e4d8", 58: "j067g484", 59: "137b6gee", 60: "3571gjde",
+    61: "770b3g68", 62: "5570j61d", 63: "0034eb6e", 64: "8j5d7ebd", 65: "ee30564d",
+    66: "40e7d430", 67: "6d741b67", 68: "b8gd1e06", 69: "gj1b4ge5", 70: "dg07e458",
+    71: "j067g4j4", 72: "137b6gde", 73: "3571gjee", 74: "770b3ge8", 75: "5570j64d",
+    76: "0034ebge", 77: "8j5d7egd", 78: "ee30567d", 79: "40e7d480", 80: "6d741b87",
+    81: "b8gd1ej6", 82: "gj1b4g65", 83: "dg07e438", 84: "j067g4d4", 85: "137b6g8e",
+    86: "3571gj8e", 87: "770b3g88", 88: "5570j68d", 89: "0034eb8e", 90: "8j5d7e8d",
+    91: "ee3056bd", 92: "40e7d4g0", 93: "6d741bj7", 94: "b8gd1e56", 95: "gj1b4gd5",
+    96: "dg07e468", 97: "j067g434", 98: "137b6g4e", 99: "3571gjbe", 100: "770b3g18",
+    101: "5570j6dd", 102: "0034eb5e", 103: "8j5d7e3d", 104: "ee30565d", 105: "40e7d4d0",
+    106: "6d741b17", 107: "b8gd1e16", 108: "gj1b4g45", 109: "dg07e4e8", 110: "j067g4g4",
+    111: "137b6g6e", 112: "3571gjge", 113: "770b3g38", 114: "5570j6jd", 115: "0034ebee",
+    116: "8j5d7e7d", 117: "ee30560d", 118: "40e7d470", 119: "6d741b47", 120: "b8gd1ed6",
+    121: "gj1b4gb5", 122: "dg07e478", 123: "j067g474", 124: "137b6gbe", 125: "3571gj1e",
+    126: "770b3gb8", 127: "5570j60d", 128: "0034eb4e", 129: "8j5d7edd", 130: "ee305jdd",
+    131: "40e7dj50", 132: "6d741e07", 133: "b86ed1bd", 134: "55gj34g5"
+  };
+
+  // Funktion um Bild-Pfad zu generieren
+  function getBildPfad(erfolgId) {
+    const code = bildCodes[erfolgId];
+    return code ? `./Bilder/erfolg_${erfolgId}_${code}.png` : './Bilder/default.png';
+  }
+
   // ------------------------------------------------------------
   // 2. Erfolgsdaten (Beispiel - nur 3 Zeilen zum Testen)
   // Ersetze dies durch die vollständige erfolge-Liste
@@ -217,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
   app.innerHTML = `
     <div id="header" class="mb-6">
       <div class="flex justify-between items-center mb-3 flex-wrap gap-2">
-        <h1 class="hero-title text-xl sm:text-2xl">Erfolge von ${accountName}</h1>
+        <h1 class="hero-title text-xl sm:text-2xl">⛏️ ${accountName}'s Erfolge ⛏️</h1>
         <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded text-xs sm:text-sm">Abmelden</button>
       </div>
 
@@ -381,20 +418,23 @@ document.addEventListener("DOMContentLoaded", () => {
       visibleItems.forEach(erfolg => {
         const checked = erfolgStatus[erfolg.id] || false;
 
+        const bildPfad = getBildPfad(erfolg.id);
+
         const card = document.createElement("div");
         card.className = `card ${checked ? "success-card" : ""}`;
 
         card.innerHTML = `
-          <div class="flex justify-between items-start w-full">
+          <div class="flex justify-between items-center w-full">
+            <img src="${bildPfad}" alt="${erfolg.name}" class="w-15 h-15 object-contain mr-2 mt-1 select-none" loading="lazy">
             <div class="flex flex-col">
               <div class="text-xs mb-1">${erfolg.name}</div>
-              <div class="beschreibung mt-1 text-[0.6rem] opacity-80">${erfolg.beschreibung}</div>
+              <div class="beschreibung mt-1 opacity-80">${erfolg.beschreibung}</div>
             </div>
 
             <div class="flex items-center gap-2">
-              <div class="flex flex-col items-end leading-none text-right">
-                <div class="text-[0.65rem] text-yellow-400">${erfolg.punkte}</div>
-                <div class="text-[0.55rem] uppercase text-gray-300">${erfolg.typ}</div>
+              <div class="flex flex-col items-end justify-center leading-none text-right">
+                <div class="erfolg-punkte">${erfolg.punkte}</div>
+                <div class="erfolg-typ">${erfolg.typ}</div>
               </div>
               <div class="checkbox ${checked ? "checked" : ""} w-5 h-5 flex items-center justify-center border border-yellow-400 rounded-sm">
                 ${checked ? "✓" : ""}
