@@ -20,10 +20,11 @@ body {
   padding: 12px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center; /* zentriert alles vertikal in der Karte */
   gap: 12px;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 0.95rem;
 }
 
 .card:hover {
@@ -36,8 +37,9 @@ body {
 }
 
 .checkbox {
-  width: 40px; 
-  height: 40px; 
+  min-width: 28px;
+  min-height: 28px;
+  padding: 4px;
   border: 3px solid #6ba344;
   background: linear-gradient(135deg,#558b2f 0%,#689f38 100%);
   display: flex;
@@ -65,7 +67,7 @@ body {
   padding: 0;
   border-radius: 0 0 4px 4px;
   color: #fff;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   max-height: 0;
   overflow: hidden;
   opacity: 0;
@@ -80,6 +82,24 @@ body {
   opacity: 1;
   padding: 0.5rem;
   pointer-events: auto;
+}
+
+.erfolg-punkte {
+  font-size: 0.95rem;
+  color: #ffd54f;
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 0; /* kein Push nach unten, bleibt mittig */
+  text-align: right;
+}
+
+.erfolg-typ {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #cfcfcf;
+  line-height: 1;
+  margin-top: 0.12rem; /* kleiner Abstand unter den Punkten */
+  text-align: right;
 }
 
 .category {
