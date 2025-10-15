@@ -403,9 +403,33 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `;
 
-        card.addEventListener("click", e => {
-          if (e.target.classList.contains("checkbox")) return;
+        card.addEventListener("click", (e) => {
+          if (e.target.classList.contains("checkbox") || e.target.closest(".checkbox")) return;
+          
+          const wasExpanded = card.classList.contains("expanded");
           card.classList.toggle("expanded");
+          
+          // Auto-Scroll wenn aufgeklappt wird
+          if (!wasExpanded) {
+            setTimeout(() => {
+              const cardRect = card.getBoundingClientRect();
+              const beschreibung = card.querySelector('.beschreibung');
+              const beschreibungRect = beschreibung.getBoundingClientRect();
+              const beschreibungBottom = beschreibungRect.bottom;
+              const categoryContent = card.closest('.category-content');
+              
+              if (categoryContent) {
+                const containerRect = categoryContent.getBoundingClientRect();
+                const containerBottom = containerRect.bottom;
+                
+                // Prüfen ob Beschreibung außerhalb des sichtbaren Bereichs ist
+                if (beschreibungBottom > containerBottom) {
+                  const scrollAmount = beschreibungBottom - containerBottom + 20; // +20px Puffer
+                  categoryContent.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+                }
+              }
+            }, 150); // Warten bis die Expand-Animation fertig ist
+          }
         });
 
         card.querySelector(".checkbox").addEventListener("click", e => {
