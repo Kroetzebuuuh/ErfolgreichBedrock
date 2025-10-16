@@ -1,7 +1,12 @@
 * { font-family: 'Press Start 2P', cursive; }
 
 body {
-  background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 50%, #1a472a 100%);
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%),
+    url('./Bilder/minecraft_background.png');
+  background-size: auto 75%;
+  background-position: top left;
+  background-repeat: repeat;
   min-height: 100vh;
   margin: 0;
   padding: 2rem;
@@ -15,12 +20,15 @@ body {
 
 .card {
   position: relative;
-  background: linear-gradient(135deg, #2d5a3d 0%, #1f4d2e 100%);
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%),
+    url('./Bilder/cobblestone_texture.png');
+    background-size: auto 100%;
   border: 4px solid #8b6f47;
   padding: 12px;
   display: flex;
   justify-content: space-between;
-  align-items: center; /* zentriert alles vertikal in der Karte */
+  align-items: center;
   gap: 12px;
   border-radius: 6px;
   cursor: pointer;
@@ -28,32 +36,44 @@ body {
 }
 
 .card:hover {
-  border-color: #ffd700;
+  border-color: #d3c01a;
 }
 
 .success-card { 
-  background: linear-gradient(135deg,#4caf50 0%,#388e3c 100%); 
-  border-color: #ffeb3b; 
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%),
+    url('./Bilder/succescard_background.png');
+    background-size: auto 350%; 
+  border-color: #21c22e; 
 }
 
 .checkbox {
-  min-width: 28px;
-  min-height: 28px;
-  padding: 4px;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
   border: 3px solid #6ba344;
-  background: linear-gradient(135deg,#558b2f 0%,#689f38 100%);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border-radius: 4px;
   flex-shrink: 0;
+  font-size: 0;
+  background-image: url('./Bilder/diamond_ore.png');
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .checkbox.checked {
-  background: linear-gradient(135deg,#ffd700 0%,#ffed4e 100%); 
-  border-color: #fbc02d;
+  background: transparent;
+  border-color: #7a7010;
   color: #000;
+  background-image: url('./Bilder/diamond_block.png');
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .beschreibung {
@@ -61,7 +81,10 @@ body {
   top: 100%;
   left: 12px;
   right: 12px;
-  background: rgba(0, 0, 0, 0.9);
+  background: transparent;
+  background-image: url('./Bilder/crying_obsidian.png');
+  background-size: auto;
+  background-repeat: repeat;
   border: 2px solid #8b6f47;
   border-top: none;
   padding: 0;
@@ -86,19 +109,19 @@ body {
 
 .erfolg-punkte {
   font-size: 0.95rem;
-  color: #ffd54f;
+  color: #65ca07;
   font-weight: 700;
   line-height: 1;
-  margin-top: 0; /* kein Push nach unten, bleibt mittig */
+  margin-top: 0;
   text-align: right;
 }
 
 .erfolg-typ {
   font-size: 0.75rem;
   text-transform: uppercase;
-  color: #cfcfcf;
+  color: #ffffff;
   line-height: 1;
-  margin-top: 0.12rem; /* kleiner Abstand unter den Punkten */
+  margin-top: 0.12rem;
   text-align: right;
 }
 
@@ -113,8 +136,10 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-  background: linear-gradient(0deg, #3d6b42 0%, #4d7b52 100%);
-  border: 4px solid #2d5a3d;
+  background: transparent;
+  background-image: url('./Bilder/woodenplanks.png');
+  background-size: auto 400%;
+  border: 4px solid #807702;
   cursor: pointer;
   user-select: none;
 }
@@ -126,8 +151,8 @@ body {
 }
 
 .category-header .title { 
-  font-size: 0.9rem; 
-  color: #ffd700; 
+  font-size: 1.2rem; 
+  color: #000000; 
 }
 
 .category-content { 
@@ -165,10 +190,21 @@ body {
 
 .hero-title { 
   text-align: center; 
+  background: transparent;
+
   margin-bottom: 18px; 
   color: #ffd700; 
   font-size: 1.6rem; 
   text-shadow: 2px 2px #000; 
+}
+
+#header-wrapper {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.6) 100%);
+  background-image: url('./Bilder/diamant_hintergrund.png');
+  background-repeat: no-repeat;
+  background-size: 100% auto ;
+  border: 1px solid #000000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 @media (min-width: 768px) {
