@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     1: "5570j635", 2: "0034ebd3", 3: "8j5d7e66", 4: "ee30561g", 5: "40e7d416",
     6: "6d741b5b", 7: "b8gd1e6b", 8: "gj1b4g3e", 9: "dg07e413", 10: "j067g453",
     11: "137b6g06", 12: "3571gj01", 13: "770b3g5j", 14: "5570j6g5", 15: "0034ebj3",
-    16: "8j5d7e06", 17: "ee30566g", 18: "40e7d4b6", 19: "6d741b3b", 20: "b8gd1e4b",
+    16: "8j5d7e06", 17: "ee3056gg", 18: "40e7d4b6", 19: "6d741b3b", 20: "b8gd1e4b",
     21: "gj1b4g5e", 22: "dg07e4b3", 23: "j067g4e3", 24: "137b6gj6", 25: "3571gj61",
     26: "770b3gdj", 27: "5570j6b5", 28: "0034eb13", 29: "8j5d7e46", 30: "ee30568g",
     31: "40e7d466", 32: "6d741bgb", 33: "b8gd1e3b", 34: "gj1b4g7e", 35: "dg07e483",
@@ -252,44 +252,46 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. UI Grundstruktur
   // ------------------------------------------------------------
   app.innerHTML = `
-    <div id="header" class="mb-6">
-      <div class="flex justify-between items-center mb-3 flex-wrap gap-2">
-        <h1 class="hero-title text-xl sm:text-2xl">⛏️ ${accountName}'s Erfolge ⛏️</h1>
-        <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded text-xs sm:text-sm">Abmelden</button>
+      <div id="header-wrapper" class="mb-6 p-4 rounded-lg">
+        <div id="header" class="mb-6">
+          <div class="flex justify-between items-center mb-3 flex-wrap gap-2">
+            <h1 class="hero-title text-xl sm:text-2xl">⛏️ ${accountName}'s Erfolge ⛏️</h1>
+            <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded text-xs sm:text-sm">Abmelden</button>
+          </div>
+
+          <div id="mobileFilters" class="hidden sm:hidden flex-wrap gap-2 justify-center text-center">
+            <button id="filterAll" class="bg-yellow-500/80 text-black px-3 py-1 rounded text-xs font-semibold w-20">Alle</button>
+            <button id="filterOpen" class="bg-yellow-500/80 text-black px-3 py-1 rounded text-xs font-semibold w-20">Offen</button>
+            <button id="filterDone" class="bg-yellow-500/80 text-black px-3 py-1 rounded text-xs font-semibold w-20">Fertig</button>
+          </div>
+        </div>
+
+        <div id="dashboard" class="mb-6 grid grid-cols-4 gap-2 text-center">
+          <div id="dash-done-wrapper" class="bg-yellow-500/80 text-black rounded p-2 cursor-pointer">
+            <div id="dash-done" class="text-xl font-bold">0</div>
+            <div class="text-[0.65rem] uppercase">Fertig</div>
+          </div>
+          <div id="dash-open-wrapper" class="bg-yellow-500/80 text-black rounded p-2 cursor-pointer">
+            <div id="dash-open" class="text-xl font-bold">0</div>
+            <div class="text-[0.65rem] uppercase">Offen</div>
+          </div>
+          <div class="bg-yellow-500/80 text-black rounded p-2">
+            <div id="dash-progress" class="text-xl font-bold">0%</div>
+            <div class="text-[0.65rem] uppercase">Progress</div>
+          </div>
+          <div class="bg-yellow-500/80 text-black rounded p-2">
+            <div id="dash-total" class="text-xl font-bold">${erfolge.length}</div>
+            <div class="text-[0.65rem] uppercase">Gesamt</div>
+          </div>
+        </div>
       </div>
 
-      <div id="mobileFilters" class="hidden sm:hidden flex-wrap gap-2 justify-center text-center">
-        <button id="filterAll" class="bg-yellow-500/80 text-black px-3 py-1 rounded text-xs font-semibold w-20">Alle</button>
-        <button id="filterOpen" class="bg-yellow-500/80 text-black px-3 py-1 rounded text-xs font-semibold w-20">Offen</button>
-        <button id="filterDone" class="bg-yellow-500/80 text-black px-3 py-1 rounded text-xs font-semibold w-20">Fertig</button>
+      <div class="mb-4">
+        <input id="searchInput" class="w-full px-4 py-2 text-black rounded text-sm" placeholder="🔍 Erfolg suchen...">
       </div>
-    </div>
 
-    <div id="dashboard" class="mb-6 grid grid-cols-4 gap-2 text-center">
-      <div id="dash-done-wrapper" class="bg-yellow-500/80 text-black rounded p-2 cursor-pointer">
-        <div id="dash-done" class="text-xl font-bold">0</div>
-        <div class="text-[0.65rem] uppercase">Fertig</div>
-      </div>
-      <div id="dash-open-wrapper" class="bg-yellow-500/80 text-black rounded p-2 cursor-pointer">
-        <div id="dash-open" class="text-xl font-bold">0</div>
-        <div class="text-[0.65rem] uppercase">Offen</div>
-      </div>
-      <div class="bg-yellow-500/80 text-black rounded p-2">
-        <div id="dash-progress" class="text-xl font-bold">0%</div>
-        <div class="text-[0.65rem] uppercase">Progress</div>
-      </div>
-      <div class="bg-yellow-500/80 text-black rounded p-2">
-        <div id="dash-total" class="text-xl font-bold">${erfolge.length}</div>
-        <div class="text-[0.65rem] uppercase">Gesamt</div>
-      </div>
-    </div>
-
-    <div class="mb-4">
-      <input id="searchInput" class="w-full px-4 py-2 text-black rounded text-sm" placeholder="🔍 Erfolg suchen...">
-    </div>
-
-    <div id="categories"></div>
-  `;
+      <div id="categories"></div>
+    `;
 
   document.getElementById("logoutBtn").addEventListener("click", () => {
     localStorage.removeItem("currentAccount");
@@ -385,7 +387,7 @@ document.addEventListener("DOMContentLoaded", () => {
       wrapper.innerHTML = `
         <div class="category-header flex justify-between items-center cursor-pointer">
           <div class="left flex items-center gap-2">
-            <span class="text-[0.7rem]">${doneInCat}/${totalInCat} erledigt</span>
+            <span class="text-[0.7rem] text-yellow-300">${doneInCat}/${totalInCat} erledigt</span>
             <span class="title">${kat}</span>
           </div>
           <div class="right flex items-center gap-3">
